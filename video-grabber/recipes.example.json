@@ -1,0 +1,8 @@
+{
+  "example-videos.co.za": {
+    "thumbnail": ".video-grid a.card",
+    "server": ".server-list button",
+    "play": ".vjs-big-play-button",
+    "waitMs": 12000
+  }
+}

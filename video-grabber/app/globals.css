@@ -1,0 +1,190 @@
+:root {
+  --bg: #eef0f4; --surface: #fff; --sunken: #f5f6f9; --fg: #14161b; --muted: #596071; --line: #dadde6;
+  --rec: #d23a2c; --rec-soft: #fbe7e4;
+  --ok: #1d7a4f; --ok-bg: #e2f3ea; --warn: #9a5a00; --warn-bg: #fbefd9; --info: #2c5d8f; --info-bg: #e2edf8;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111318; --surface: #191c23; --sunken: #14161c; --fg: #e8eaf0; --muted: #9aa1b2; --line: #2b2f3a;
+    --rec: #ff5a4a; --rec-soft: #3a1c19;
+    --ok: #5fd39b; --ok-bg: #173226; --warn: #f0b45a; --warn-bg: #3a2a12; --info: #7fb6ee; --info-bg: #18293b;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 var(--font); padding: 32px 16px 56px; }
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 22px; }
+header { display: grid; gap: 8px; }
+.mark { display: flex; align-items: center; gap: 8px; font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 0 4px var(--rec-soft); }
+h1 { margin: 0; font-size: clamp(28px, 6vw, 38px); line-height: 1.1; letter-spacing: -.02em; }
+.lede { margin: 0; color: var(--muted); max-width: 62ch; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 12px; }
+.label { font-weight: 600; font-size: 13px; }
+.input-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.input-row input { flex: 1 1 260px; min-width: 0; font: 14px var(--mono); color: var(--fg); background: var(--sunken); border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+.btn { font: 600 14px var(--font); border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+.btn:hover:not(:disabled) { border-color: var(--muted); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.ghost { background: transparent; }
+:focus-visible { outline: 2px solid var(--rec); outline-offset: 2px; }
+.jobs { display: grid; gap: 10px; }
+.empty { color: var(--muted); text-align: center; border: 1px dashed var(--line); border-radius: 12px; padding: 28px 16px; margin: 0; }
+.job { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; min-width: 0; }
+.job-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+.title { font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
+.url, .meta { margin: 0; font: 12.5px var(--mono); color: var(--muted); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.pill { font: 600 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; color: var(--info); background: var(--info-bg); }
+.pill.done { color: var(--ok); background: var(--ok-bg); }
+.pill.error, .pill.cancelled { color: var(--rec); background: var(--rec-soft); }
+.pill.scan { color: var(--warn); background: var(--warn-bg); }
+.bar { height: 6px; background: var(--sunken); border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--rec); transition: width .4s ease; }
+.bar span.indeterminate { width: 30% !important; animation: slide 1.2s ease-in-out infinite; }
+@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+@media (prefers-reduced-motion: reduce) { .bar span, .bar span.indeterminate { animation: none; transition: none; } }
+.error { margin: 0; font-size: 13.5px; color: var(--fg); background: var(--rec-soft); border-radius: 8px; padding: 10px 12px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+footer { font-size: 12.5px; color: var(--muted); }
+code { font-family: var(--mono); font-size: .92em; }
+.hint { margin: 0; font-size: 13px; color: var(--muted); max-width: 70ch; }
+.gallery { gap: 14px; }
+.gallery-head { display: flex; flex-wrap: wrap; gap: 10px 16px; justify-content: space-between; align-items: flex-start; }
+.gallery-head > div:first-child { min-width: 0; }
+.gallery h2 { margin: 0; font-size: 18px; }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; }
+.tile { position: relative; display: grid; gap: 6px; padding: 6px; border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; background: var(--sunken); height: 100%; }
+.tile.on { border-color: var(--rec); background: var(--rec-soft); }
+.tile input { position: absolute; z-index: 1; top: 10px; left: 10px; width: 18px; height: 18px; accent-color: var(--rec); }
+.thumb { display: block; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 6px; overflow: hidden; background: var(--line); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tile-title { font-size: 12.5px; line-height: 1.35; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.cap-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cap-input { font: 13px var(--mono); color: var(--fg); background: var(--sunken); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; }
+input.cap-input { width: 80px; }
+.cap-input:disabled { opacity: .5; }
+.link { font: inherit; color: var(--fg); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.modal { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 20px; width: min(420px, calc(100vw - 32px)); }
+.modal::backdrop { background: rgb(0 0 0 / .45); }
+.modal h2 { margin: 0 0 8px; font-size: 18px; }
+.modal p { margin: 0 0 10px; }
+.modal .actions { margin-top: 14px; }
+.notice { margin: 0; font-size: 13.5px; color: var(--fg); background: var(--info-bg); border-radius: 8px; padding: 10px 12px; }
+.thumb { position: relative; }
+.tile.had { cursor: default; opacity: .55; }
+.had-badge { position: absolute; right: 6px; bottom: 6px; font: 600 10.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; color: var(--ok); background: var(--ok-bg); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+.tab { font: 600 14px var(--font); color: var(--muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px; margin-bottom: -1px; cursor: pointer; }
+.tab:hover { color: var(--fg); }
+.tab.on { color: var(--fg); border-bottom-color: var(--rec); }
+/* A 9:16 phone-shaped frame: as tall as fits on screen, never wider than the page. */
+/* Moved with the up/down buttons, not by scrolling. */
+.feed { width: min(100%, 450px, calc(82vh * 9 / 16)); aspect-ratio: 9 / 16; overflow: hidden; background: #000; border-radius: 12px; }
+.feed-wrap { position: relative; display: flex; justify-content: center; align-items: center; gap: 14px; }
+.feed-nav { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.feed-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font: 600 22px var(--font); cursor: pointer; }
+.feed-btn:hover:not(:disabled) { border-color: var(--muted); }
+.feed-btn:disabled { opacity: .35; cursor: default; }
+.feed-pos { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+/* No room beside the video on a phone: put the buttons on it, along the right edge. */
+@media (max-width: 560px) {
+  .feed-nav { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 3; }
+  /* The buttons stay usable over the comments; keep the text clear of them. */
+  .comments-body { padding-right: 62px; }
+  .feed-btn { width: 42px; height: 42px; background: rgb(0 0 0 / .45); color: #fff; border-color: rgb(255 255 255 / .35); }
+  .feed-pos { color: #fff; text-shadow: 0 1px 2px #000; }
+}
+.reel { position: relative; height: 100%; }
+/* Pinned to the frame so a tall video can't stretch the slide; "contain" keeps the whole picture visible. */
+.reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; cursor: pointer; transition: height .25s ease; }
+/* Comments open over the video: the video shrinks into the top 40%, whole, above them (like the TikTok app). */
+.reel.with-comments video { bottom: auto; height: 40%; }
+.reel.with-comments .reel-info { display: none; }
+.reel-info { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(transparent, rgb(0 0 0 / .75)); color: #fff; pointer-events: none; }
+.reel-title { margin: 0; font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.reel-meta { margin: 4px 0 0; font: 12px var(--mono); color: rgb(255 255 255 / .75); }
+/* Speed and sound, side by side in the top-right corner of the video. */
+.reel-top { position: absolute; z-index: 1; top: 12px; right: 12px; display: flex; gap: 8px; }
+.reel-sound { font: 600 12px var(--font); color: #fff; background: rgb(0 0 0 / .5); border: 1px solid rgb(255 255 255 / .35); border-radius: 99px; padding: 6px 12px; cursor: pointer; }
+.grid.compact { max-height: 40vh; }
+.reel-creator { margin: 0 0 2px; font-weight: 700; font-size: 14px; }
+.reel-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0 0; font-size: 13px; }
+.reel-stats a { color: #fff; pointer-events: auto; text-underline-offset: 2px; }
+.reel-link { font: inherit; color: #fff; background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; pointer-events: auto; }
+/* Comments slide over the lower part of the video, like on TikTok. Fixed colours: it always sits on video. */
+.comments { position: absolute; left: 0; right: 0; bottom: 0; height: 60%; display: flex; flex-direction: column; background: #16181d; color: #f2f3f5; border-radius: 14px 14px 0 0; z-index: 2; }
+.comments-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid #2b2f38; font-size: 14px; }
+.comments-close { background: none; border: 0; color: #f2f3f5; font-size: 16px; cursor: pointer; padding: 4px 6px; }
+.comments-body { flex: 1; overflow-y: auto; padding: 4px 14px 14px; }
+.comments-note { font-size: 13.5px; color: #c4c8d0; }
+.comments-note p { margin: 12px 0; }
+.comment-list { list-style: none; margin: 0; padding: 0; }
+.comment-list li { padding: 10px 0; border-bottom: 1px solid #23262d; }
+.comment-user { margin: 0; font-size: 12.5px; font-weight: 700; color: #aab0bb; }
+.comment-text { margin: 2px 0; font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; }
+.comment-meta { margin: 0; font: 11.5px var(--mono); color: #8a909b; }
+.comments-open { display: inline-block; margin-top: 12px; font-size: 13px; color: #f2f3f5; }
+.tt-auth { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.tt-auth p { margin: 0; font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+.tt-auth-text { display: grid; gap: 6px; }
+label.btn { display: inline-block; }
+label.btn.disabled { opacity: .5; pointer-events: none; }
+.tt-auth-error { flex-basis: 100%; order: 3; }
+/* Wide screens: comments in a column beside the video, in the page's own colours. The row is wider than the
+   page column, so it breaks out of it, centred. Keep the breakpoint in step with SIDE_BY_SIDE in tiktok-feed.tsx. */
+@media (min-width: 1000px) {
+  .feed-wrap.with-comments { --row: min(980px, calc(100vw - 32px)); width: var(--row); margin-left: calc((100% - var(--row)) / 2); }
+}
+/* Exactly the video's height (its frame is min(450px, 82vh × 9/16) wide at 9:16), so a long list scrolls inside
+   instead of stretching the row. */
+.comments.side { position: static; flex: 0 1 360px; min-width: 0; height: min(800px, 82vh); background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; }
+.comments.side .comments-head { border-bottom-color: var(--line); }
+.comments.side .comments-close, .comments.side .comments-open { color: var(--fg); }
+.comments.side .comments-note { color: var(--muted); }
+.comments.side .comment-list li { border-bottom-color: var(--line); }
+.comments.side .comment-user, .comments.side .comment-meta { color: var(--muted); }
+.tt-auto { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.tt-auto p { margin: 0; font-size: 13.5px; color: var(--muted); max-width: 60ch; }
+.tt-auth p.tt-auth-alert { color: var(--fg); background: var(--warn-bg); border-radius: 8px; padding: 10px 12px; max-width: none; }
+/* ---------- phones: full-screen player ---------- */
+html.no-scroll, html.no-scroll body { overflow: hidden; }
+.watch-full { width: 100%; }
+.feed-wrap.immersive { position: fixed; inset: 0; z-index: 50; display: block; background: #000; }
+.feed-wrap.immersive .feed { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; }
+.feed-wrap.immersive .feed-nav { position: absolute; right: calc(10px + env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); z-index: 3; }
+.feed-wrap.immersive .feed-btn { width: 44px; height: 44px; background: rgb(0 0 0 / .45); color: #fff; border-color: rgb(255 255 255 / .35); }
+.feed-wrap.immersive .feed-pos { color: #fff; text-shadow: 0 1px 2px #000; }
+.feed-wrap.immersive .reel-top { top: calc(12px + env(safe-area-inset-top)); }
+.feed-wrap.immersive .reel-info { padding-bottom: calc(18px + env(safe-area-inset-bottom)); padding-right: 64px; }
+.feed-wrap.immersive .comments-body { padding-right: 62px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+.feed-exit { position: absolute; z-index: 3; top: calc(12px + env(safe-area-inset-top)); left: calc(12px + env(safe-area-inset-left)); width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgb(255 255 255 / .35); background: rgb(0 0 0 / .45); color: #fff; font-size: 18px; cursor: pointer; }
+.feed-empty { display: grid !important; place-content: center; gap: 14px; text-align: center; color: #e8eaf0; }
+.feed-empty p { margin: 0; }
+@media (prefers-reduced-motion: reduce) { .reel video { transition: none; } }
+/* With comments open over the video, the ↑/↓ buttons move down into the comments, clear of their ✕. */
+.feed-wrap.comments-over .feed-nav { top: 72%; }
+/* ---------- phones: swipe between videos ---------- */
+.feed.swipe { overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior: contain; scrollbar-width: none; }
+.feed.swipe::-webkit-scrollbar { display: none; }
+.feed.swipe .reel { scroll-snap-align: start; scroll-snap-stop: always; }
+/* With the comments open, swipes scroll the comments, not the videos. */
+.feed.swipe.locked { overflow-y: hidden; }
+.comments-body { overscroll-behavior: contain; }
+/* The comments button lives on the right edge instead. */
+.feed.swipe .reel-link { display: none; }
+.feed-side { position: absolute; z-index: 3; right: calc(10px + env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.feed-side .feed-btn { width: 48px; height: 48px; font-size: 22px; background: rgb(0 0 0 / .6); color: #fff; border-color: rgb(255 255 255 / .45); box-shadow: 0 2px 8px rgb(0 0 0 / .35); }
+.feed-side .feed-pos { color: #fff; font: 600 12.5px var(--font); text-shadow: 0 1px 2px #000; }
+.feed-side .feed-btn { display: grid; place-items: center; }
+.feed-side .feed-pos + .feed-btn { margin-top: 10px; }
+.feed-toast { position: absolute; z-index: 4; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: min(90%, 420px); padding: 9px 14px; border-radius: 99px; background: rgb(0 0 0 / .78); color: #fff; font-size: 13.5px; overflow-wrap: anywhere; text-align: center; pointer-events: none; }
+.feed-undo { pointer-events: auto; display: flex; gap: 12px; align-items: center; }
+.feed-undo button { font: 700 13.5px var(--font); color: #ff8a7d; background: none; border: 0; padding: 0; cursor: pointer; }
+.empty-undo { margin: 10px 0 0; } .feed-empty .empty-undo .link { color: #ff8a7d; }
+.tt-auto-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tt-auto-actions input.cap-input { width: 70px; }
+.reel-speed { min-width: 46px; font-variant-numeric: tabular-nums; }

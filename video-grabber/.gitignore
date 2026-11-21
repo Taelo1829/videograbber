@@ -1,0 +1,7 @@
+node_modules/
+.next/
+downloads/
+.env*.local
+next-env.d.ts
+*.tsbuildinfo
+.tiktok-profile/
